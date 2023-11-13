@@ -24,10 +24,19 @@ tmp/format_c: $(C)
 tmp/format_d: $(D)
 	dub run dfmt -- -i $? && touch $@
 
+# doc
+.PHONY: doc
+doc: \
+	doc/Turbo_Vision_Version_2.0_Programming_Guide_1992.pdf
+
+doc/Turbo_Vision_Version_2.0_Programming_Guide_1992.pdf:
+	$(CURL) $@ http://bitsavers.informatik.uni-stuttgart.de/pdf/borland/Turbo_Vision_Version_2.0_Programming_Guide_1992.pdf
+
 # install
-.PHONY: install update
-install:
+.PHONY: install update gz
+install: doc gz
 	$(MAKE) update
 update:
 	sudo apt update
 	sudo apt install -yu `cat apt.$(OS)`
+gz:

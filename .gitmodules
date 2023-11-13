@@ -7,3 +7,6 @@
 [submodule "ref/dn2l"]
 	path = ref/dn2l
 	url = https://github.com/unxed/dn2l.git
+[submodule "ref/turbo"]
+	path = ref/turbo
+	url = https://github.com/magiblot/turbo.git

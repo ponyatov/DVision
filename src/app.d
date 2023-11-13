@@ -1,4 +1,18 @@
 module app;
 
-class App {
+class VApplication {
+    this() {
+    }
+
+    VApplication init() {
+        return this;
+    }
+
+    VApplication run() {
+        return this;
+    }
+
+    VApplication done() {
+        return this;
+    }
 }

@@ -1,0 +1,41 @@
+{
+    "multiCommand.commands": [
+        { "command": "multiCommand.f11",
+            "sequence": [ "workbench.action.files.saveAll",
+                { "command": "workbench.action.terminal.sendSequence",
+                    "args": {"text": "\u000D clear ; LANG=C make all format \u000D"}}]},
+        { "command": "multiCommand.f12",
+            "sequence": [ "workbench.action.files.saveAll",
+                { "command": "workbench.action.terminal.sendSequence",
+                    "args": {"text": "\u000D clear ; LANG=C make run \u000D"}}]}
+    ],
+
+    // editor
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.rulers": [80],
+    "workbench.tree.indent": 24,
+    "explorer.autoReveal": false,
+    "files.insertFinalNewline": true,
+
+    // C++
+    "[c,cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format",
+        "editor.formatOnSave":     true
+    },
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+
+    // clang-format
+    "clang-format.executable":     "clang-format",
+    "clang-format.fallbackStyle":  "Google",
+    "clang-format.style": "file",
+
+    // D
+    "d.projectImportPaths": [
+        "${userHome}/.dub/packages"
+    ],
+    "d.dubPath"    : "/usr/bin/dub",
+    "d.dmdPath"    : "/usr/bin/dmd",
+    "d.dubCompiler": "/usr/bin/dmd"
+}

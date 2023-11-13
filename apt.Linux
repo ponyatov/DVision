@@ -1,3 +1,4 @@
 git make curl rsync
 code meld clang-format
 d-apt-keyring dmd-compiler dmd-tools dub g++
+libncurses-dev

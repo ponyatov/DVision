@@ -1,0 +1,9 @@
+[submodule "ref/benwbooth"]
+	path = ref/benwbooth
+	url = https://github.com/benwbooth/tvision.git
+[submodule "ref/magiblot"]
+	path = ref/magiblot
+	url = https://github.com/magiblot/tvision.git
+[submodule "ref/dn2l"]
+	path = ref/dn2l
+	url = https://github.com/unxed/dn2l.git

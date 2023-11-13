@@ -1,11 +1,14 @@
 {
-	"name":         "dvision",
-	"description":  "Turbo Vision port to D lang",
-	"authors":     ["Dmitry Ponyatov <dponyatov@gmail.com>"],
-	"copyright":    "Copyright © 2023, Dmitry Ponyatov <dponyatov@gmail.com>",
-	"license":      "MIT",
-	"targetType":   "library",
-	"targetPath":   "bin",
-	"subPackages": ["navigator"],
-	"dependencies": {}
+    "name":         "dvision",
+    "description":  "Turbo Vision port to D lang",
+    "authors":     ["Dmitry Ponyatov <dponyatov@gmail.com>"],
+    "copyright":    "Copyright © 2023, Dmitry Ponyatov <dponyatov@gmail.com>",
+    "license":      "MIT",
+    "targetType":   "library",
+    "targetPath":   "bin",
+    "subPackages": ["nafigator"],
+    "dependencies": {
+        "ncurses": "~>1.0.0",
+        "fswatch": "~>0.6.1"
+    }
 }

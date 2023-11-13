@@ -1,0 +1,154 @@
+Поддержка UTF-8 включается при задании параметра трансляции __UTF8__.
+Поддержка только для кодовых страниц с символами одинарной ширины (один символ
+- одно знакоместо) и с теми, коды которых в UTF-8 зинимают не более 3 байт.
+Данные ограничения подразумеваются и используются как факт.
+Поддержка UTF-8 реализована только для Unix-систем.
+Поддержка языка интерфейса TV, отличного от английского не проверялась.
+Не английские шорткаты не делались.
+
+При задании __UTF8__ меняется формат буферов вывода, теперь тип данных в буфере
+не ushort (пара символ + атрибуты), а TCharHolder:
+   - без __UTF8__ по-прежнему ushort с символом в младшем байте и атрибутами
+     в старшем
+   - с заданием __UTF8__ - uint32 с атрибутами в младшем байте и байтами
+     символа в UTF-8 в трех старших.
+Для унификации введен также тип TSymbol - char без задания __UTF8__ и uint32
+в противном случае.
+
+Основные изменения в хидерах:
+1. Для служебных текстов типа строк икон окна, специальных символов и т.д.
+   тип char изменен на TSymbol.
+2. Для того, чтобы можно было настраивать служебные тексты в процессе
+   выполнения, введена ссылка на friend-функцию updatePseudoGraphics().
+3. В структуру клавиатурного события введено поле для UTF-символа.
+
+Замена служебных текстов на последовательности UTF-8 производится в процедуре
+updatePseudoGraphics() (файл tvtext1.cpp) в зависимости от флага
+TScreen::useUTF8.
+
+
+Недоделки.
+^^^^^^^^^^
+- Работа с ресурсами не переделывалась
+- Не сделаны акселераторы для не ASCII символов
+
+
+Замечание по TEditor
+^^^^^^^^^^^^^^^^^^^^^
+
+По текстам видно, что писали их не менее трех человек. Мы старались
+придерживаться стиля конкретного файла, но как получилось...
+Внутренний формат с окончанием строк "\r\n" считаем идиотизмом и изменили его
+на '\n'. Для совместимости с предыдущими версиями добавлен метод 
+    virtual void normalizeBuffer();
+Возврат старого формата не предусмотрен.
+Для регистронезависимого поиска пришлось отказаться от хэша, т.к. при
+фиксированном количестве символов длина хэшируемой области в байтах - величина
+переменная для UTF-8.
+
+
+Текущее состояние
+^^^^^^^^^^^^^^^^^^
+
+Сделан нижний уровень ввода/вывода.
+Сделаны процедуры среднего уровня для работы с UTF-8.
+Для проверки добавлен тест hello2.cpp
+
+Не все контролы проверены:
+
+-- : не нуждается в переделке (мое мнение, может ошибочное)
+-  : не переделывалось
++  : переделано, не проверено
+++ : переделано и проверено
++- : переделано с функциональными ограничениями
+неотмеченное пока не рассматривалось
+
+Если необходимы еще какие-то контролы, давайте тестовые задачи, будем делать
+в фоновом режиме.
+
+ colorsel.cpp
+++ drivers.cpp
+-  edits2.cpp	Только самый нижний уровень
+-- editstat.cpp
+++ frmline2.cpp
+-- grp.cpp
+ help.cpp
+ helpbase.cpp
+-- histlist.cpp
+++ linux.cpp
+-- mapcolor.cpp
+-- menu.cpp
+-- misc.cpp
+++ msgbox.cpp
+-- names.cpp
+-- new.cpp
+-- newstr.cpp
+++ os2handl.cpp
+-- palette.cpp
+-- sall.cpp
+++ stddlg.cpp
+++ swapst2.cpp
+-- syserr.cpp
+-- tapplica.cpp
+++ tbkgrnd.cpp
+++ tbutton.cpp
++  tchdrdlg.cpp
+-- tcheckbo.cpp
+++ tcluster.cpp
+-- tcmdset.cpp
+-- tcollect.cpp
++- tcombo.cpp	не сделан TCombo::incrementalSearch остальное проверено
+++ tdesktop.cpp
+-- tdialog.cpp
+ tdircoll.cpp
+ tdirlist.cpp
+++ teditor1.cpp
+++ teditor2.cpp
+ teditwnd.cpp
+-- tevent.cpp
+ textview.cpp
+++ tfildlg.cpp
+-- tfilecol.cpp
+ tfiledtr.cpp
+++ tfillist.cpp
+++ tframe.cpp
+-- tgrmv2.cpp
+-- tgroup.cpp
+++ thistory.cpp
+-- thistwin.cpp
+++ thstview.cpp
++  tindictr.cpp
+++ tinputli.cpp
+-- tlabel.cpp
+++ tlistbox.cpp
+++ tlstview.cpp
+-- tmemo.cpp
+++ tmenubar.cpp
+++ tmenubox.cpp
+++ tmnuview.cpp
+-- tmouse.cpp
+-- tobject.cpp
+-  tobjstrm.cpp
+-  tparamte.cpp
+-- tpoint.cpp
+++ tprogram.cpp
+++ tradiobu.cpp
+-- trescoll.cpp
+-- tresfile.cpp
+-- tscreen.cpp
+++ tscrlbar.cpp
+-- tscrolle.cpp
+-- tsortcol.cpp
+++ tstatict.cpp
++  tstatusl.cpp
+-- tstrcoll.cpp		virtual compare нуждается в переделке для не ASCII
+-  tstrlist.cpp
+-  ttprvln2.cpp
+++ tvcursr2.cpp
+-- tvexpsd2.cpp
+-- tview.cpp
+++ tvtext1.cpp
+++ tvtext2.cpp
+++ tvwrite2.cpp
+-- twindow.cpp
+?? _extrn.cpp

@@ -1,0 +1,60 @@
+1. Using Putty
+   1) Connection->Data: Set Terminal-type string to 'xterm-putty' or
+     'xterm-putty_appl'. Use the supplied files with 'tic'.
+   2) 'xterm-putty' provides the key definitions for the Normal mode,
+      'xterm-putty_appl' for the Application mode (See Terminal-Features).
+   3) Putty does not generate proper key codes when Shift is pressed.
+      Use Alt-arrows instead of Shift-arrows. Use Alt-Home and Alt-End
+      instead of Ctrl-Home and Ctrl-End.
+2. Using NetSarang Xmanager.
+   1) Specify the following command line parameter when starting xterm:
+      -xrm XTerm*metaSendsEscape:true
+   2) When using UTF-8, also add:
+      +bdc
+   3) It is recommended to reduce brightness of color7, for example:
+      -xrm XTerm*color7:gray60
+   4) X Extensions XKEYBOARD must be checked in the Profile Properties/Advanced.
+3. Using VanDyke SecureCRT.
+   1) Do not use "swUTF8' in the TVOPT environment variable.
+   2) It is recommended to use special layout (xterm-scokey in terminfo) and
+      specify the terminal type 'xterm-scokey'. In SecureCRT, enable xterm
+      emulation with user-defined keyboard using the provided xt-sco.key.
+4. IDA uses the libncurses (libcurses) dynamic library. In some Linux distributions
+   (Fedora, SuSe), when libncurses-devel installed, the ld-script is present
+   instead of a symlink. This script can not be used for dynamic loading.
+   You need to check and to create a link to the actual library.
+5. If libncurses (and libcurses) are not present, only the following
+   terminals are supported: xterm, linux, xterm-scokey and scoansi.
+   Additionally, xterm must be run with the following parameters:
+      -xrm XTerm*metaSendsEscape:true
+      -xrm XTerm*modifyCursorKeys:2
+      -xrm XTerm*modifyFunctionKeys:2
+   Also recommended:
+      -xrm XTerm*color7:gray60
+   When using UTF8:
+      +bdc
+6. Use -x when compiling the provided terminfo entry-description files
+   (xterm-scokey, xterm-putty), e.g.:
+      tic -x xterm-putty
+7. Notes for using UTF-8. When using UTF-8 and xterm, depending on xterm
+   compiling option, the -u8 and +lc options may be needed. See xterm
+   documentation, or You can use uxterm script.
+8. IDA use the TVOPT environment variable to control IO modes.
+   It has the following subfields delimited by commas ',':
+      noX11   - when libX11.so is incompatible
+      noGPM   - when libgpm.so is incompatible
+                also, when this flag is present, and gpm does not work at
+                the start of the program - do not trace its attachment
+      noUTF8  - do not use UTF8 for pseudographic chars
+      UTF8    - force UTF8 for pseudographic chars
+      swUTF8  - force switching to UTF8 by escape sequence "\e%G".
+      ansi    -
+           OR
+      mono    - when the terminfo data of your display does not declare
+                it has having the ANSI-color support
+      ign8    - ignore '8bit as meta key' in the terminfo description
+      noacsc  - do not use 'acsc' table from terminfo
+                (use builtin table from pseudographic chars)
+                recommended if you are using unicode-font on 'linux' terminal
+      xtrack  - if your xterm-emulator in telnet client does not support
+                the mode 1002 (only 1000), set this flag

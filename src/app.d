@@ -1,0 +1,4 @@
+module app;
+
+class App {
+}

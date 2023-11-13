@@ -8,6 +8,6 @@
     "targetPath":   "../bin",
     "targetName":   "nafigator",
     "dependencies": {
-        "dvision": {"path":"../"}
+        "dv": { "path":".." }
     }
 }

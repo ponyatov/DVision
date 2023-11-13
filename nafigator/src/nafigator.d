@@ -3,6 +3,8 @@ module nafigator;
 import std.stdio;
 import std.range;
 
+import dv;
+
 void main(string[] args) {
     foreach (argc, argv; args.enumerate)
         arg(argc, argv);

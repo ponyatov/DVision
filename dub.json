@@ -1,5 +1,5 @@
 {
-    "name":         "dvision",
+    "name":         "dv",
     "description":  "Turbo Vision port to D lang",
     "authors":     ["Dmitry Ponyatov <dponyatov@gmail.com>"],
     "copyright":    "Copyright © 2023, Dmitry Ponyatov <dponyatov@gmail.com>",
